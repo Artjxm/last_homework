@@ -1,0 +1,27 @@
+RRCRequest DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+RRCConnectionRequest ::= SEQUENCE {
+    criticalExtensions CHOICE {
+        rrcConnectionRequest-r8 RRCConnectionRequest-r8-IEs,
+        criticalExtensionsFuture SEQUENCE {}
+    }
+}
+RRCConnectionRequest-r8-IEs ::= SEQUENCE {
+    ue-Identity InitialUE-Identity,
+    establishmentCause EstablishmentCause,
+    spare BIT STRING (SIZE (1))
+}
+InitialUE-Identity ::= CHOICE {
+    s-TMSI S-TMSI,
+    randomValue BIT STRING (SIZE (40))
+}
+EstablishmentCause ::= ENUMERATED {
+    emergency, highPriorityAccess, mt-Access, mo-Signalling,
+    mo-Data, delayTolerantAccess-v1020, spare2, spare1
+}
+S-TMSI ::= SEQUENCE {
+    mMEC    MME-Code,
+    m-TMSI    M-TMSI
+}
+MME-Code ::= OCTET STRING (SIZE(1))
+M-TMSI ::= OCTET STRING (SIZE(4))
+END

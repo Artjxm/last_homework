@@ -1,0 +1,23 @@
+RRCSetupComplete DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+RRCConnectionSetupComplete ::= SEQUENCE {
+    rrc-TransactionIdentifier RRC-TransactionIdentifier,
+    c1 CHOICE {
+        rrcConnectionSetupComplete-r8 RRCConnectionSetupComplete-r8-IEs,
+        spare3 NULL, spare2 NULL, spare1 NULL
+    }
+}
+
+RRC-TransactionIdentifier ::= INTEGER (0..3)
+
+RRCConnectionSetupComplete-r8-IEs ::= SEQUENCE {
+    selectedPLMN-Identity INTEGER (1..6),
+    registeredMME RegisteredMME OPTIONAL,
+    dedicatedInfoNAS DedicatedInfoNAS
+}
+
+DedicatedInfoNAS ::= OCTET STRING
+RegisteredMME ::= SEQUENCE {
+   mmegi BIT STRING (SIZE (16)),
+   mmec BIT STRING (SIZE (8))
+}
+END
